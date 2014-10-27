@@ -1,0 +1,35 @@
+<html>
+	<head>
+		<script src="jquery.js"></script>
+		<script src="/socket.io/socket.io.js"></script>
+		<script src="javascripts/chat.js"></script>
+		<script src="javascripts/chat_ui.js"></script>
+
+	</head>
+
+	<body>
+		<h1>File Server</h1>
+		<div class="user"></div>
+		<br></br>
+		<div class="sender"></div>
+
+		<label for="received messages">received messages</label>
+		<section id="received-messages">
+
+		</section>
+		<br></br>
+
+		<label for="sent messages">sent messages</label>
+		<section id="sent-messages">
+
+		</section>
+		<br></br>
+		<form>
+			<label for="messages">messages</label>
+			<input id="messages" name="server[messages]">
+			<input type="submit">
+		</form>
+
+
+	</body>
+</html>
