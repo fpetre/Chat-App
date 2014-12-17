@@ -48,6 +48,12 @@ $( function(){
 		$(".sender").text("sent from server");
 	});
 
+	socket.on('userDisconnect', function (data){
+
+		$("#received-messages").text(data.user + " has left the chat");
+		$(".sender").text("sent from server");
+	});
+
 	$form.on("submit",function(event){
 		event.preventDefault();
 		getSendMessage();
