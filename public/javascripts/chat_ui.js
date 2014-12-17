@@ -18,7 +18,11 @@ $( function(){
 	};
 
 	var getSendMessage = function () {
-		sendToAll();
+		if (getMessage().indexOf("/") === 0) {
+			chat.processCommand(getMessage());
+		} else {
+			sendToAll();
+		}
 		addMessage();
 		$form.find("input#messages").val("");
 	};
@@ -34,9 +38,14 @@ $( function(){
 	});
 
 	socket.on('sendmessage', function (data) {
-	$(".user").text(nickname);
-	$("#received-messages").text(data.text);
-	$(".sender").text("sent from:" + data.user);
+		$(".user").text(nickname);
+		$("#received-messages").text(data.text);
+		$(".sender").text("sent from:" + data.user);
+	});
+
+	socket.on('errorMessage', function (data){
+		$("#received-messages").text(data.text);
+		$(".sender").text("sent from server");
 	});
 
 	$form.on("submit",function(event){
