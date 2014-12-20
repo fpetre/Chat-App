@@ -1,0 +1,76 @@
+/*reset*/
+html, body, header, h1, h2, div, main, section, label, ul, li, form, input {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+}
+
+body {
+  font-family: sans-serif;
+}
+
+ul {
+  list-style: none;
+}
+
+h1 {
+  font-size: 24px;
+}
+
+input[type="text"] {
+    -webkit-appearance: none;
+    display: inline-block;
+    box-sizing: content-box;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    width: auto;
+    font: inherit;
+    vertical-align: baseline;
+    background: transparent;
+    color: inherit;
+}
+
+  /*clear fix*/
+.group:after {
+  clear: both;
+  display: block;
+  content: "";
+}
+
+/*site header*/
+.site-header{
+  background: darkblue;
+}
+
+
+.site-header > h1 {
+  color: white;
+  font-weight: bold;
+  text-align: center;
+}
+
+.site-header > .user {
+  color: white;
+  font-weight: bold;
+  text-align: center;
+}
+
+/*site-main*/
+.site-sidebar {
+  float: left;
+  height: 100%;
+  width: 200px;
+  background: lightgreen;
+  overflow: auto;
+}
+
+.room-main {
+  height: 100%;
+  background: lightyellow;
+  overflow: auto;
+}
