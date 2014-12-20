@@ -4,6 +4,7 @@ $( function(){
 	var chat = new Chat(socket);
 	var $form = $("form");
 	var nickname = "";
+	var currentRoom = "";
 	var userList = [];
 	var roomList = {};
 
@@ -50,7 +51,11 @@ $( function(){
 	};
 
 	var renderRoomList = function () {
-
+		$("#room-list").empty();
+		for (var room in roomList) {
+			var roomElement = $("<li id=" + room + ">" + room + "</li>");
+			$("#room-list").append(roomElement);
+		}
 	};
 
 	var updateRoomList = function (rooms) {
@@ -85,6 +90,10 @@ $( function(){
 	});
 
 	socket.on('roomChangeResult', function (data){
+		if (data.success === true) {
+			currentRoom = data.roomName;
+			$(".room").text(currentRoom);
+		}
 		$("#received-messages").text(data.message);
 		$(".sender").text("sent from server");
 	});
