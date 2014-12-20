@@ -74,3 +74,15 @@ input[type="text"] {
   background: lightyellow;
   overflow: auto;
 }
+
+/*room main*/
+.room-header {
+  background: lightgrey;
+}
+.room-header > .room {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+/*room-content*/
