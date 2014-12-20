@@ -5,6 +5,7 @@ $( function(){
 	var $form = $("form");
 	var nickname = "";
 	var userList = [];
+	var roomList = {};
 
 	var getMessage = function () {
 		return $form.find("input#messages").val();
@@ -48,6 +49,26 @@ $( function(){
 		userList = newUserList;
 	};
 
+	var renderRoomList = function () {
+
+	};
+
+	var updateRoomList = function (rooms) {
+		var newRoomList = {};
+		for (var prop in rooms) {
+			var roomName = rooms[prop];
+			if(!rooms.hasOwnProperty(prop)){
+				continue;
+			}
+			if (newRoomList[roomName] === undefined) {
+				newRoomList[roomName] = [prop];
+			} else {
+				newRoomList[roomName].push(prop);
+			}
+		}
+		roomList = newRoomList;
+	};
+
 
 	socket.on('nicknameChangeResult', function (data){
 		if (data.success === true) {
@@ -61,6 +82,16 @@ $( function(){
 	socket.on("nicknameChangeUpdate", function (data) {
 		updateUserList(data.users);
 		renderUserList();
+	});
+
+	socket.on('roomChangeResult', function (data){
+		$("#received-messages").text(data.message);
+		$(".sender").text("sent from server");
+	});
+
+	socket.on("roomUpdate", function (data){
+		updateRoomList(data.currentRooms);
+		renderRoomList();
 	});
 
 	socket.on('sendmessage', function (data) {
