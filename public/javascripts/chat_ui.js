@@ -5,8 +5,9 @@ $( function(){
 	var $form = $("form");
 	var nickname = "";
 	var currentRoom = "";
-	var userList = [];
+	var userList = {};
 	var roomList = {};
+	var chatLog = [];
 
 	var getMessage = function () {
 		return $form.find("input#messages").val();
@@ -25,6 +26,8 @@ $( function(){
 			chat.processCommand(getMessage());
 		} else {
 			sendToAll();
+			updateChatLog(nickname, getMessage());
+			renderChatLog();
 		}
 		addMessage();
 		$form.find("input#messages").val("");
@@ -32,23 +35,17 @@ $( function(){
 
 	var renderUserList = function () {
 		$("#user-list").empty();
-		for (var i = 0; i < userList.length; i++) {
-			var userElement = $("<li id=" + userList[i] + ">" + userList[i] + "</li>");
+		for (var userId in userList) {
+			var userElement = $("<li id=" + userList[userId] + ">" + userList[userId] + "</li>");
 			$("#user-list").append(userElement);
 		}
 	};
 
 	var updateUserList = function (users) {
-		var newUserList = [];
-		for (var prop in users ) {
-			if(!users.hasOwnProperty(prop)){
-				continue;
-			}
-			newUserList.push(users[prop]);
-		}
-
-		userList = newUserList;
+		userList = users;
 	};
+
+
 
 	var renderRoomList = function () {
 		$("#room-list").empty();
@@ -74,6 +71,39 @@ $( function(){
 		roomList = newRoomList;
 	};
 
+	var renderCurrentRoomUsers = function () {
+		if (roomList[currentRoom] !== undefined) {
+			$("#room-user-list").empty();
+			roomList[currentRoom].forEach(function (userId) {
+				var username = userList[userId];
+				var userElement = $("<li id=" + username + ">" + username + "</li>");
+				$("#room-user-list").append(userElement);
+			});
+		}
+	};
+
+	var clearChatLog = function () {
+		chatLog = [];
+	};
+
+	var updateChatLog = function (sender, message) {
+		chatLog.push([sender, message]);
+	};
+
+	var renderChatLog = function () {
+		$("#chat-log").empty();
+		for (var i = 0; i < chatLog.length; i++) {
+			var sender = chatLog[i][0];
+			var message = chatLog[i][1];
+			var senderElement = $("<span class='chat-log-item-sender'>" + sender + "</span>");
+			var messageElement = $("<span class='chat-log-item-message'>" + message + "</span>");
+			var chatLogItem = $("<li class='chat-log-item'></li>");
+			chatLogItem.append(senderElement);
+			chatLogItem.append(messageElement);
+			$("#chat-log").append(chatLogItem);			
+		};
+	};
+
 
 	socket.on('nicknameChangeResult', function (data){
 		if (data.success === true) {
@@ -87,26 +117,35 @@ $( function(){
 	socket.on("nicknameChangeUpdate", function (data) {
 		updateUserList(data.users);
 		renderUserList();
+		renderCurrentRoomUsers();
 	});
 
 	socket.on('roomChangeResult', function (data){
 		if (data.success === true) {
 			currentRoom = data.roomName;
 			$(".room").text(currentRoom);
+			renderCurrentRoomUsers();
+			clearChatLog();
+			renderChatLog();
 		}
 		$("#received-messages").text(data.message);
 		$(".sender").text("sent from server");
+
 	});
 
 	socket.on("roomUpdate", function (data){
 		updateRoomList(data.currentRooms);
 		renderRoomList();
+		renderCurrentRoomUsers();
 	});
 
 	socket.on('sendmessage', function (data) {
+		updateChatLog(data.user, data.text);
 		$(".user").text(nickname);
 		$("#received-messages").text(data.text);
 		$(".sender").text("sent from:" + data.user);
+		renderChatLog();
+
 	});
 
 	socket.on('errorMessage', function (data){
@@ -122,6 +161,7 @@ $( function(){
 	socket.on('addUser', function (data){
 		updateUserList(data.users);
 		renderUserList();
+		renderCurrentRoomUsers();
 	});
 
 
@@ -129,6 +169,7 @@ $( function(){
 	socket.on('removeUser', function (data){
 		updateUserList(data.users);
 		renderUserList();
+		renderCurrentRoomUsers();
 	});
 
 
