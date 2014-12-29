@@ -1,6 +1,11 @@
 // var Chat = require("./chat.js")
 $( function(){
-	var socket = io("http://localhost:8000");
+	if (typeof HEROKU_URL === 'undefined' ) {
+		var url = "http://localhost:8000"
+	} else {
+		var url = HEROKU_URL
+	}
+	var socket = io(url);
 	var chat = new Chat(socket);
 	var $form = $("form");
 	var nickname = "";
