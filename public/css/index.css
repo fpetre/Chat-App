@@ -64,7 +64,7 @@ input[type="text"] {
 .site-sidebar {
   float: left;
   height: 100%;
-  width: 200px;
+  width: 400px;
   background: lightgreen;
   overflow: auto;
 }
@@ -73,6 +73,11 @@ input[type="text"] {
   height: 100%;
   background: lightyellow;
   overflow: auto;
+}
+
+.chat-commands > h2 {
+  font-weight: bold;
+  font-size: 20px;
 }
 
 /*room main*/
