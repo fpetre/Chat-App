@@ -17,10 +17,6 @@ $( function(){
 		chat.sendMessage(getMessage());
 	};
 
-	var addMessage = function () {
-		$("#sent-messages").text(getMessage());
-	};
-
 	var getSendMessage = function () {
 		if (getMessage().indexOf("/") === 0) {
 			chat.processCommand(getMessage());
@@ -29,7 +25,6 @@ $( function(){
 			updateChatLog(nickname, getMessage());
 			renderChatLog();
 		}
-		addMessage();
 		$form.find("input#messages").val("");
 	};
 
@@ -110,8 +105,7 @@ $( function(){
 			nickname = data.username;
 			$(".user").text(nickname);
 		}
-			$("#received-messages").text(data.message);
-			$(".sender").text("sent from server");
+			$("#messages-from-server").text(data.message);
 	});
 
 	socket.on("nicknameChangeUpdate", function (data) {
@@ -128,9 +122,7 @@ $( function(){
 			clearChatLog();
 			renderChatLog();
 		}
-		$("#received-messages").text(data.message);
-		$(".sender").text("sent from server");
-
+		$("#messages-from-server").text(data.message);
 	});
 
 	socket.on("roomUpdate", function (data){
@@ -141,21 +133,16 @@ $( function(){
 
 	socket.on('sendmessage', function (data) {
 		updateChatLog(data.user, data.text);
-		$(".user").text(nickname);
-		$("#received-messages").text(data.text);
-		$(".sender").text("sent from:" + data.user);
 		renderChatLog();
 
 	});
 
 	socket.on('errorMessage', function (data){
-		$("#received-messages").text(data.text);
-		$(".sender").text("sent from server");
+		$("#messages-from-server").text(data.text);
 	});
 
 	socket.on('userDisconnect', function (data){
-		$("#received-messages").text(data.user + " has left the chat");
-		$(".sender").text("sent from server");
+		$("#messages-from-server").text(data.user + " has left the chat");
 	});
 
 	socket.on('addUser', function (data){
