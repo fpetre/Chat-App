@@ -1,6 +1,6 @@
 // var Chat = require("./chat.js")
 $( function(){
-	var socket = io("http://localhost:8000");
+	var socket = io.connect();
 	var chat = new Chat(socket);
 	var $form = $("form");
 	var nickname = "";
