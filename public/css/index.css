@@ -58,31 +58,65 @@ input[type="text"] {
   color: white;
   font-weight: bold;
   text-align: center;
+  font-size: 20px;
+  height: 30px;
 }
 
-/*site-main*/
-.site-sidebar {
-  float: left;
-  height: 100%;
-  width: 400px;
-  background: lightgreen;
-  overflow: auto;
-}
-
-.room-main {
-  height: 100%;
-  background: lightyellow;
-  overflow: auto;
+/*sidebar*/
+.chat-commands {
+  padding-bottom: 20px;
 }
 
 .chat-commands > h2 {
   font-weight: bold;
   font-size: 20px;
+  padding-bottom: 5px;
 }
+
+
+label[for=room-list] {
+  font-weight: bold;
+  font-size: 20px;
+  padding-bottom: 5px;
+}
+
+#room-list {
+  padding-bottom: 20px;
+}
+
+label[for=user-list] {
+  font-weight: bold;
+  font-size: 20px;
+  padding-bottom: 5px;
+}
+
+#user-list {
+  padding-bottom: 20px;
+}
+
+/*site-main*/
+.site-sidebar {
+  float: left;
+  height: calc(100% - 60px);
+  width: 400px;
+  background: lightgreen;
+  border: 1px solid #9d9d9d;
+  overflow: auto;
+}
+
+.room-main {
+  height: calc(100% - 60px);
+  background: lightyellow;
+  overflow: auto;
+}
+
 
 /*room main*/
 .room-header {
-  background: lightgrey;
+  background-color: #fff;
+  background-image: linear-gradient(#fff, #f5f5f5);
+  border: 1px solid #9d9d9d;
+  height: 25px;
 }
 .room-header > .room {
   font-size: 20px;
@@ -91,16 +125,51 @@ input[type="text"] {
 }
 
 /*room-content*/
-
 .room-chat {
-  height: 100%;
+  height: calc(100% - 25px);;
   overflow: auto;
+  word-break: break-all; 
+  word-wrap: break-word;
+  border-collapse: collapse;
+  display: table;
 }
 
 .room-info {
   float: right;
-  height: 100%;
+  height: calc(100% - 25px);
   width: 200px;
   overflow: auto;
   background: orange;
+  border: 1px solid #9d9d9d;
+}
+
+label[for=room-user-list] {
+  display: block;
+  padding-bottom: 5px;
+}
+
+/*chat log*/
+.chat-log-item-message {
+  margin-left: 10px;
+}
+
+#messages-from-server {
+  padding-bottom: 20px;
+}
+
+#chat-log {
+  padding-bottom: 20px;
+}
+
+.room-chat-input {
+  display: table-row;
+  vertical-align: bottom;
+  height: 18px;
+}
+
+
+
+#messages {
+  padding-left: 10px;
+  background: white;
 }
