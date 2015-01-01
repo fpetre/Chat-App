@@ -44,7 +44,9 @@ input[type="text"] {
 
 /*site header*/
 .site-header{
-  background: darkblue;
+  /*background: darkblue;*/
+  background-color: #313949;
+  border-bottom: 1px solid #263140;
 }
 
 
@@ -97,15 +99,17 @@ label[for=user-list] {
 /*site-main*/
 .site-sidebar {
   float: left;
-  height: calc(100% - 60px);
+  height: calc(100% - 61px);
   width: 400px;
   background: lightgreen;
+  background-color: #f7f7f7;
   border: 1px solid #9d9d9d;
   overflow: auto;
 }
 
 .room-main {
-  height: calc(100% - 60px);
+  height: calc(100% - 61px);
+  background: #f5f5f5;
   background: lightyellow;
   overflow: auto;
 }
@@ -126,20 +130,19 @@ label[for=user-list] {
 
 /*room-content*/
 .room-chat {
-  height: calc(100% - 25px);;
+  height: calc(100% - 29px);;
   overflow: auto;
   word-break: break-all; 
   word-wrap: break-word;
-  border-collapse: collapse;
-  display: table;
 }
 
 .room-info {
   float: right;
-  height: calc(100% - 25px);
+  height: calc(100% - 29px);
   width: 200px;
   overflow: auto;
   background: orange;
+  background-color: #fff;
   border: 1px solid #9d9d9d;
 }
 
@@ -161,10 +164,19 @@ label[for=room-user-list] {
   padding-bottom: 20px;
 }
 
+.room-chat-content {
+   min-height: 100%;
+   margin-bottom: -20px;
+}
+
+.room-chat-content:after {
+  content: "";
+  display: block;
+  height: 20px;
+}
+
 .room-chat-input {
-  display: table-row;
-  vertical-align: bottom;
-  height: 18px;
+  height: 20px;
 }
 
 
