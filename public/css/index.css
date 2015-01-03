@@ -166,20 +166,28 @@ label[for=room-user-list] {
 
 .room-chat-content {
    min-height: 100%;
-   margin-bottom: -20px;
+   margin-bottom: -40px;
 }
 
 .room-chat-content:after {
   content: "";
   display: block;
-  height: 20px;
+  height: 40px;
 }
 
 .room-chat-input {
   height: 20px;
+  padding: 10px;
+  background-image: linear-gradient(#fff, #d9d9d9);
 }
 
-
+.room-chat-input > input[type=submit] {
+  background-image: linear-gradient(#fff, #e9e9e9);
+  border: 1px solid #AAABAB;
+  cursor: pointer;
+  margin-left: 10px;
+  padding: 3px;
+}
 
 #messages {
   padding-left: 10px;
