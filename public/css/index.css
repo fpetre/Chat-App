@@ -141,7 +141,7 @@ label[for=user-list] {
   height: calc(100% - 29px);
   width: 200px;
   overflow: auto;
-  background: orange;
+  background: orange; 
   background-color: #fff;
   border: 1px solid #9d9d9d;
 }
@@ -166,18 +166,20 @@ label[for=room-user-list] {
 
 .room-chat-content {
    min-height: 100%;
-   margin-bottom: -40px;
+   margin-bottom: -82px;
 }
 
 .room-chat-content:after {
   content: "";
   display: block;
-  height: 40px;
+  height: 82px;
 }
 
 .room-chat-input {
-  height: 20px;
-  padding: 10px;
+  min-width: 1015px;
+  height: 40px;
+  padding: 20px;
+  border: 1px solid #9d9d9d;
   background-image: linear-gradient(#fff, #d9d9d9);
 }
 
@@ -185,11 +187,28 @@ label[for=room-user-list] {
   background-image: linear-gradient(#fff, #e9e9e9);
   border: 1px solid #AAABAB;
   cursor: pointer;
-  margin-left: 10px;
-  padding: 3px;
+  margin-left: 20px;
+  padding: 10px;
+  display: block;
+  float: left;
+}
+
+.room-chat-input > label[for=messages] {
+  line-height: 40px;
+  font-weight: bold;
+  font-size: 20px;
+  display: block;
+  float: left;
+  height: 40px;
 }
 
 #messages {
+  border: 1px solid #AAABAB;
+  margin-left: 10px;
+  display: block;
+  float: left;
   padding-left: 10px;
   background: white;
+  height: 40px;
+  width: 800px;
 }

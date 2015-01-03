@@ -10,7 +10,7 @@ $( function(){
 	var chatLog = [];
 
 	var getMessage = function () {
-		return $form.find("input#messages").val();
+		return $form.find("#messages").val();
 	};
 
 	var sendToAll = function () {
